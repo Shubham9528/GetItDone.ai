@@ -25,7 +25,7 @@ const connectionString = process.env.RENDER_DB;
 const db = new Client({
     connectionString, // Connection string includes user, host, database, password, and port
     ssl: {
-      rejectUnauthorized: true, // Required for connecting to databases with SSL, like Render
+      rejectUnauthorized: false, // Required for connecting to databases with SSL, like Render
     },
   });
 db.connect(); 
@@ -119,23 +119,13 @@ async function deleteTodo(id) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //************************************************Tools End*************************************************//
+
+
+
+
+
+
 
 
 //******************************************************************************************************************************** */
