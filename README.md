@@ -206,22 +206,6 @@ This component is the main entry point for the AI Assistant in the application. 
 
 #### Key Code:
 ```tsx
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Send, Bot, User, Sparkles, Brain, CheckCircle2, Circle } from 'lucide-react';
-
-interface Todo {
-  id: string;
-  todo: string;
-  completed: boolean;
-  category: string;
-}
-
-interface Message {
-  role: 'user' | 'ai';
-  content: string;
-}
-
 function AiAssistant() {
   const SYSTEM_PROMPT = "Hello! I'm your AI assistant. How can I help you today?";
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -254,32 +238,11 @@ function AiAssistant() {
       const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_URL}/ai-response`, {
         message: query,
       });
-      const aiMessage: Message = {
-        role: 'ai',
+
         content: response.data.response || "I'm sorry, I couldn't understand that.",
-      };
-      setMessages((prev) => [...prev, aiMessage]);
-    } catch (error) {
-      console.error('Error fetching AI response:', error);
-      setMessages((prev) => [...prev, { role: 'ai', content: 'An error occurred while communicating with the server.' }]);
-    }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto mb-8 text-center">
-        <div className="inline-flex items-center gap-3">
-          <Sparkles className="w-10 h-10 text-purple-600" />
-          <h1 className="text-4xl font-bold text-gray-800">GetItDone.ai</h1>
-        </div>
-        <p className="text-gray-600 mt-2">Your AI-powered task management assistant</p>
-      </div>
-      {/* Remaining UI code */}
-    </div>
-  );
-}
-
-export default AiAssistant;
+ 
 ```
 
 ## 🤝 Contributing
