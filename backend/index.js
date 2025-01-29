@@ -3,14 +3,11 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
-// import { db } from './db/index.js';
 import pkg from 'pg';
 const { Client } = pkg;
 import SYSTEM_PROMPT from './component/systemPrompt.js';
-import pg from "pg";
-import { todosTable } from './db/schema.js'
-import { ilike, eq, max } from 'drizzle-orm';
-import readlineSync from 'readline-sync';
+
+
 dotenv.config();
 const app = express();
 const PORT = process.env.BACKEND_PORT_NO

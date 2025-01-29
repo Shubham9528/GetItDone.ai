@@ -1,32 +1,20 @@
 {
-  "name": "ai-todo-app",
+  "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate",
-    "studio": "drizzle-kit studio"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@google/generative-ai": "^0.21.0",
-    "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "drizzle-orm": "^0.38.4",
     "express": "^4.21.2",
-    "generate": "^0.14.0",
     "openai": "^4.80.1",
-    "pg": "^8.13.1",
-    "readline-sync": "^1.4.10"
-  },
-  "devDependencies": {
-    "@types/pg": "^8.11.11",
-    "drizzle-kit": "^0.30.2",
-    "tsx": "^4.19.2"
+    "pg": "^8.13.1"
   }
 }
