@@ -162,26 +162,124 @@ CREATE TABLE "todos" (
 ## 📂 Project Structure
 ```
 getitdone.ai/
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.js
-│   │   ├── main.jsx
-│   ├── public/
-│   ├── .env
-│   ├── package.json
-│   ├── vite.config.js
 ├── backend/
-│   ├── src/
-│   │   ├── routes/
-│   │   ├── controllers/
-│   │   ├── models/
-│   │   ├── index.js
+│   ├── component/
 │   │   ├── systemPrompt.js
 │   ├── .env
+│   ├── index.js
+│   ├── package-lock.json
 │   ├── package.json
-│   ├── server.js
+│   ├── vercel.json
+├── frontend/
+│   ├── .bolt/
+│   ├── node_modules/
+│   ├── public/
+│   ├── src/
+│   │   ├── App.tsx
+│   │   ├── index.css
+│   │   ├── main.tsx
+│   │   ├── vite-env.d.ts
+│   ├── .env
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── tailwind.config.js
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   ├── vercel.json
+│   ├── vite.config.ts
+├── .gitignore
+```
+
+## 📑 Frontend Code
+### `AiAssistant Component`
+This component is the main entry point for the AI Assistant in the application. It manages the chat interface and displays a real-time to-do list.
+
+#### Features:
+- Fetches to-do items from the backend when the component loads.
+- Allows users to interact with the AI Assistant via chat.
+- Displays AI-generated responses dynamically.
+
+#### Key Code:
+```tsx
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Send, Bot, User, Sparkles, Brain, CheckCircle2, Circle } from 'lucide-react';
+
+interface Todo {
+  id: string;
+  todo: string;
+  completed: boolean;
+  category: string;
+}
+
+interface Message {
+  role: 'user' | 'ai';
+  content: string;
+}
+
+function AiAssistant() {
+  const SYSTEM_PROMPT = "Hello! I'm your AI assistant. How can I help you today?";
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    { role: 'ai', content: SYSTEM_PROMPT },
+  ]);
+  const [chatInput, setChatInput] = useState('');
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_URL}/get-todo`);
+        if (response.data && Array.isArray(response.data.tasks)) {
+          setTodos(response.data.tasks);
+        }
+      } catch (error) {
+        console.error('Error fetching to-do list:', error);
+      }
+    };
+    fetchTodos();
+  }, [messages]);
+
+  const sendMessage = async (query: string) => {
+    if (!query.trim()) return;
+    const userMessage: Message = { role: 'user', content: query };
+    setMessages((prev) => [...prev, userMessage]);
+    setChatInput('');
+
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_APP_BACKEND_URL}/ai-response`, {
+        message: query,
+      });
+      const aiMessage: Message = {
+        role: 'ai',
+        content: response.data.response || "I'm sorry, I couldn't understand that.",
+      };
+      setMessages((prev) => [...prev, aiMessage]);
+    } catch (error) {
+      console.error('Error fetching AI response:', error);
+      setMessages((prev) => [...prev, { role: 'ai', content: 'An error occurred while communicating with the server.' }]);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto mb-8 text-center">
+        <div className="inline-flex items-center gap-3">
+          <Sparkles className="w-10 h-10 text-purple-600" />
+          <h1 className="text-4xl font-bold text-gray-800">GetItDone.ai</h1>
+        </div>
+        <p className="text-gray-600 mt-2">Your AI-powered task management assistant</p>
+      </div>
+      {/* Remaining UI code */}
+    </div>
+  );
+}
+
+export default AiAssistant;
 ```
 
 ## 🤝 Contributing
