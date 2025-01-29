@@ -31,6 +31,12 @@ const db = new Client({
 db.connect(); 
 
 
+//******************************************************************************************************//
+app.get('/', (req, res) => {
+    res.send('<h1>VE3 Task Manager Backend Server is running</h1>')
+});
+//********************************************************************************************************//
+
 //connection to local database
 
 // const db = new pg.Client({
@@ -377,9 +383,6 @@ app.post('/get-todo', async (req, res) => {
 
 
 
-app.get('/', (req, res) => {
-    res.send('<h1>Backend Server is running!!!!!</h1>');
-})
 
 app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}`);
