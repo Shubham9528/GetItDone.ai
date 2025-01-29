@@ -249,7 +249,7 @@ function AiAssistant() {
 If you'd like to contribute, please fork the repository and submit a pull request.
 
 ## 📜 License
-This project is licensed under the MIT License.
+This project is licensed under the codeFolio License.
 
 ## 📩 Contact
-For any issues, please contact [your-email@example.com](mailto:your-email@example.com).
+For any issues, please contact [codefolio.inquiry@gmail.com](mailto:your-email@example.com).
