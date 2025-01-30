@@ -75,108 +75,88 @@ function AiAssistant() {
 
   return (
     
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 p-4 md:p-8">
-      {/* Main Heading */}
-      <div className="max-w-7xl mx-auto mb-8 text-center">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6 md:p-12 flex flex-col items-center text-gray-200">
+      
+      {/* Header */}
+      <div className="max-w-4xl w-full text-center mb-8">
         <div className="inline-flex items-center gap-3">
-          <Sparkles className="w-10 h-10 text-purple-600" />
-          <h1 className="text-4xl font-bold text-gray-800">GetItDone.ai</h1>
+          <Sparkles className="w-10 h-10 text-blue-400 animate-pulse" />
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent animate-pulse">
+        GetItDone.ai
+      </h1>
         </div>
-        <p className="text-gray-600 mt-2">Your AI-powered task management assistant</p>
+        <p className="text-sm md:text-base text-gray-400 mt-2">Your AI-powered task management assistant</p>
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Chat Section - Left side */}
-        <div className="bg-white rounded-xl shadow-xl p-6 flex flex-col">
-          <div className="flex items-center gap-3 mb-6">
-            <Bot className="w-8 h-8 text-purple-600" />
-            <h2 className="text-2xl font-bold text-gray-800">AI Chat Assistant</h2>
+      {/* Main Content Grid */}
+      <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* AI Chat Assistant - Dynamic Sizing */}
+        <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-md p-5 flex flex-col border border-gray-700 hover:shadow-xl transition duration-300 min-h-[200px] max-h-[80vh] overflow-auto">
+          <div className="flex items-center gap-3 mb-5">
+            <Bot className="w-6 h-6 text-blue-400" />
+            <h2 className="text-lg md:text-xl font-semibold text-white">AI Chat Assistant</h2>
           </div>
 
-          <div className="flex-grow overflow-y-auto max-h-[calc(100vh-300px)] mb-6 space-y-4">
+          {/* Chat Messages */}
+          <div className="flex-grow overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-600">
             {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex items-start gap-3 ${
-                  message.role === 'user' ? 'flex-row-reverse' : ''
-                }`}
-              >
-                <div
-                  className={`p-2 rounded-full ${
-                    message.role === 'user' ? 'bg-purple-100' : 'bg-gray-100'
-                  }`}
-                >
-                  {message.role === 'user' ? (
-                    <User className="w-5 h-5 text-purple-600" />
-                  ) : (
-                    <Bot className="w-5 h-5 text-gray-600" />
-                  )}
+              <div key={index} className={`flex items-start gap-3 ${message.role === "user" ? "flex-row-reverse" : ""}`}>
+                <div className={`p-2 rounded-full ${message.role === "user" ? "bg-blue-400" : "bg-gray-600"}`}>
+                  {message.role === "user" ? <User className="w-4 h-4 text-white" /> : <Bot className="w-4 h-4 text-gray-200" />}
                 </div>
-                <div
-                  className={`px-4 py-2 rounded-lg max-w-[80%] ${
-                    message.role === 'user'
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-gray-100 text-gray-800'
-                  }`}
-                >
+                <div className={`px-3 py-2 rounded-lg text-sm max-w-[75%] shadow ${message.role === "user" ? "bg-blue-500 text-white" : "bg-gray-700 text-gray-300"}`}>
                   {message.content}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="relative">
+          {/* Chat Input */}
+          <div className="relative mt-4">
             <input
               type="text"
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && sendMessage(chatInput)}
-              placeholder="Type your message..."
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              onKeyPress={(e) => e.key === "Enter" && sendMessage(chatInput)}
+              placeholder="Type a message..."
+              className="w-full px-4 py-2 rounded-lg bg-gray-800 text-gray-200 border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
             />
-            <button
-              onClick={() => sendMessage(chatInput)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-full transition-colors"
-            >
-              <Send className="w-5 h-5 text-purple-600" />
+            <button onClick={() => sendMessage(chatInput)} className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-gray-700 hover:bg-gray-600 rounded-full transition">
+              <Send className="w-4 h-4 text-blue-400" />
             </button>
           </div>
         </div>
 
-        {/* Todo List Section - Right side */}
-        <div className="bg-white rounded-xl shadow-xl p-6">
-          <div className="flex items-center gap-3 mb-6">
-            <Brain className="w-8 h-8 text-purple-600" />
-            <h2 className="text-2xl font-bold text-gray-800">Todo List</h2>
+        {/* Todo List - Dynamic Sizing */}
+        <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-md p-5 border border-gray-700 hover:shadow-xl transition duration-300 min-h-[200px] max-h-[80vh] overflow-auto">
+          <div className="flex items-center gap-3 mb-5">
+            <Brain className="w-6 h-6 text-blue-400" />
+            <h2 className="text-lg md:text-xl font-semibold text-white">Todo List</h2>
           </div>
 
+          {/* Todo Items */}
           <div className="space-y-3">
             {todos.map((todo) => (
-              <div
-                key={todo.id}
-                className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
-              >
+              <div key={todo.id} className="flex items-center gap-3 p-3 bg-gray-700 rounded-lg hover:bg-gray-600 transition">
                 <div className="flex-shrink-0">
-                  {todo.completed ? (
-                    <CheckCircle2 className="w-6 h-6 text-green-500" />
-                  ) : (
-                    <Circle className="w-6 h-6 text-gray-400" />
-                  )}
+                  {todo.completed ? <CheckCircle2 className="w-5 h-5 text-green-400" /> : <Circle className="w-5 h-5 text-gray-400" />}
                 </div>
-                <span
-                  className={`flex-grow ${
-                    todo.completed ? 'line-through text-gray-400' : 'text-gray-700'
-                  }`}
-                >
+                <span className={`flex-grow text-sm ${todo.completed ? "line-through text-gray-400" : "text-gray-300"}`}>
                   {todo.todo}
                 </span>
-                <span className="px-2 py-1 text-xs font-medium text-purple-600 bg-purple-100 rounded-full">
+                <span className="px-2 py-1 text-xs font-medium text-blue-400 bg-blue-900/30 rounded-full">
                   {todo.category || "General"}
                 </span>
               </div>
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-8 text-center text-gray-500 text-xs">
+        © 2025 GetItDone.ai | <a href="http://www.codefolio.co.in" className="text-blue-400 hover:text-blue-300 transition">CodeFolio</a> | Built with ❤️ and AI
       </div>
     </div>
   );
