@@ -300,7 +300,7 @@ app.post('/ai-response', async (req, res) => {
         while (true) {
             // Call OpenAI API to get chat completion
             const chat = await openai.chat.completions.create({
-                model: 'gpt-4o-mini',
+                model: 'gpt-4o',
                 messages: message,
                 response_format: { type: 'json_object' },
             });
