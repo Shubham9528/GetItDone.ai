@@ -155,7 +155,7 @@ function AiAssistant() {
       </div>
 
       {/* Footer */}
-      <div className="mt-8 text-center text-gray-500 text-xs">
+      <div className="mt-8 text-center text-gray-500 text-lg">
         © 2025 GetItDone.ai | <a href="http://www.codefolio.co.in" className="text-blue-400 hover:text-blue-300 transition">CodeFolio</a> | Built with ❤️ and AI
       </div>
     </div>
