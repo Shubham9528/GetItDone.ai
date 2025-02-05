@@ -3,6 +3,10 @@
 ## 🌟 Overview
 GetItDone.ai is an AI-powered task management web application that helps users efficiently manage their to-do lists while interacting with an AI assistant. The application is built using React.js for the frontend and Express.js for the backend, integrating OpenAI for AI interactions and PostgreSQL for data storage.
 
+![image](https://github.com/user-attachments/assets/38814af8-5e90-4daa-a581-f6c288a9756b)
+
+
+
 ## ✨ Features
 - 🤖 AI-powered task management assistant
 - 💬 Real-time AI chat assistant for task-related queries
